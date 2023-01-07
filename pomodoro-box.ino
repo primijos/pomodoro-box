@@ -1,5 +1,3 @@
-//www.elegoo.com                                                                
-//2018.12.19                                                                    
 #include <Servo.h>                                                              
 Servo myservo;      
 
