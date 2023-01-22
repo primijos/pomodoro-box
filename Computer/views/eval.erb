@@ -1,0 +1,43 @@
+<% content_for :title do %>
+  Pomodoro-box, avaluem el tema
+<% end %>
+
+<% if @show_results %>
+  <% @disabled_str="disabled" %>
+  <h1> Resultats... </h1>
+<% else %>
+  <% @disabled_str="" %>
+  <h1> Avaluem el tema! </h1>
+<% end %>
+
+<% if @show_results %>
+  <h1> El teu resultat... <%= @pct %>/10</h1>
+<% end %>
+
+
+<form method="post">
+  <% @questions.each_with_index do |question,qi| %>
+    <%= question[:text] %>
+    <br>
+    <% question[:responses].each_with_index do |response,ri| %>
+      <input <%= response[:checked] %> <%= @disabled_str %> name="question_<%=qi%>" type="radio" value="<%=ri%>" class="<%= response[:status]  %>">
+      <%= response[:text] %> <%= response[:good] %>
+      <br>
+    <% end %>
+  <% end %>
+  <% if @show_results %>
+    <% if @pct > 50 %>
+      <a href="/open" role="button">Genial, obre la caixa!</a>
+      </button>
+    <% else %>
+      <a href="/eval" role="button">Vaja... tornem a provar-ho</a>
+      ... o ...
+      <a href="/study" role="button">Vaja... tornem a repassar...</a>
+    <% end %>
+  <% else %>
+    <button>
+      Envia!
+    </button>
+  <% end %>
+</form>
+

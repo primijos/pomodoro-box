@@ -1,4 +1,5 @@
-#include <Servo.h>                                                              
+#include <Servo.h>      
+#include <stdint.h>                                                        
 Servo myservo;      
 
 #define STATUS_CLOSED 0
@@ -8,26 +9,67 @@ Servo myservo;
 
 String status_str[2]={"closed","open"};
 int current_status = STATUS_OPEN;
+uint32_t millis_limit = 0;
                                                                                 
 void setup(){            
-  Serial.begin(9600);                                                       
+  Serial.begin(115200,SERIAL_8N1);  
+  //Serial.begin(9600);                                                     
   myservo.attach(9);                                                            
   myservo.write(ANGLE_OPEN);// move servos to center position -> 90°
+  delay(500);
+  myservo.write(ANGLE_CLOSED);
+  delay(500);
+  myservo.write(ANGLE_OPEN);
+  delay(500);
   feedback();
 }   
 void feedback() {
-  Serial.println("status: " + status_str[current_status]);
-}                                                                            
+  uint32_t remain=0;
+  if (millis_limit > 0) {
+    remain = millis_limit - millis();
+  }
+  Serial.println("status: " + status_str[current_status] + " " + remain);
+}               
+
+void open() {
+  millis_limit=0;
+  myservo.write(ANGLE_OPEN);
+  current_status = STATUS_OPEN;
+}
+
+void close(uint32_t l){
+  millis_limit = l;
+  myservo.write(ANGLE_CLOSED);
+  current_status = STATUS_CLOSED;
+}
+
 void loop(){        
   //Serial.println("loop"); 
+  if (current_status==STATUS_CLOSED && millis_limit > 0) {
+    uint32_t current_millis = millis();
+    if (current_millis > millis_limit) {
+      open();
+    }
+  }
   if (Serial.available()) {
     String msg = Serial.readString();
     if (msg.startsWith("close")) {
-      myservo.write(ANGLE_CLOSED);
-      current_status = STATUS_CLOSED;
+      int space = msg.indexOf(" ");
+      if (space!=-1) {
+        int secs = msg.substring(space+1).toInt();
+        if (secs>0) {
+          uint32_t secs_millis = secs*1000;
+          uint32_t now = millis();
+          millis_limit = now + secs_millis;
+          close(millis_limit);
+        } else {
+          close(0);
+        }
+      } else {
+        close(0);
+      }
     } else if (msg.startsWith("open")) {
-      myservo.write(ANGLE_OPEN);
-      current_status = STATUS_OPEN;
+      open();
     }
     feedback();
   }                                                           

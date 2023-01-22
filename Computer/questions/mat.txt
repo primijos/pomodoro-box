@@ -1,0 +1,14 @@
+P: Pregunta 1
+
+R: a
+bc
+
+r: b
+
+R: c
+
+P: Pregunta 2
+
+r: uno
+R: dos
+R: tres

@@ -1,0 +1,15 @@
+<% content_for :title do %>
+  Pomodoro-box, selecciona el temps
+<% end %>
+
+<h1> Selecciona el temps que vols dedicar...</h1>
+<form method="post">
+  <h2> ...l'estudi...</h1>
+  <% @prefix=:study%>
+  <%= erb :time_form_fields %>
+  <h2> ...i el límit per recuperar el telèfon :-)</h1>
+  <% @prefix=:limit%>
+  <%= erb :time_form_fields %>
+  <br/>
+  <button>Enviar</button>
+</form>

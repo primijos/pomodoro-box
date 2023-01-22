@@ -1,0 +1,17 @@
+  <select name="<%=@prefix%>_hours">
+    <option value"09"> 00 </option>
+    <option value"01"> 01 </option>
+  </select>
+  hora/es
+  <select name="<%=@prefix%>_minutes">
+    <% ["00",15,30,45].each do |t| %>
+      <option value"<%=t%>"> <%= t %> </option>
+    <% end %>
+  </select>
+  minut(s)
+  <select name="<%=@prefix%>_seconds">
+    <% ["00",15,30,45].each do |t| %>
+      <option value"<%=t%>"> <%= t %> </option>
+    <% end %>
+  </select>
+  segon(s)
