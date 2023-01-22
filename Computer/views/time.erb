@@ -10,6 +10,16 @@
   <h2> ...i el límit per recuperar el telèfon :-)</h1>
   <% @prefix=:limit%>
   <%= erb :time_form_fields %>
+<h1>I el percentatge mínim d'encerts</h1>
+  <select name="percent">
+    <% 6.times do |t| %>
+      <option value="<%= 50 + t*10 %>">
+      <%= 50 + t*10 %>%
+      </option>
+    <% end %>
+  </select>
+
   <br/>
-  <button>Enviar</button>
+
+  <button type="submit" class="XXbtn XXbtn-primary">Enviar</button>
 </form>

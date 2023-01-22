@@ -11,7 +11,7 @@
 <% end %>
 
 <% if @show_results %>
-  <h1> El teu resultat... <%= @pct %>/10</h1>
+  <h1> El teu resultat... <%= @pct %>/100 (esperat: >= <%= @percent %>)</h1>
 <% end %>
 
 
@@ -26,8 +26,8 @@
     <% end %>
   <% end %>
   <% if @show_results %>
-    <% if @pct > 50 %>
-      <a href="/open" role="button">Genial, obre la caixa!</a>
+    <% if @pct >= @percent %>
+      <a href="/open-box" role="button">Genial, obre la caixa!</a>
       </button>
     <% else %>
       <a href="/eval" role="button">Vaja... tornem a provar-ho</a>
@@ -35,7 +35,7 @@
       <a href="/study" role="button">Vaja... tornem a repassar...</a>
     <% end %>
   <% else %>
-    <button>
+    <button type="submit" class="btn btn-primary">
       Envia!
     </button>
   <% end %>
