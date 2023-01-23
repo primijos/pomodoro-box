@@ -4,8 +4,44 @@
 
 <h1> Preparats, llestos... </h1>
 
-Estem a punt de començar, diposita el mòbil a la capsa pomodoro i tanca-la,
-si us plau. Quan l'hagis tancat, prem continuar...
+Estem a punt de començar, comprova els paràmetres que has configurat a continuació:
+
+<div class="row col-lg-6">
+<table class="table table-bordered border-secondary">
+  <tbody>
+    <tr>
+      <th scope="row" class="table-secondary">
+        Temps d'estudi
+      </td>
+      <td class="table-success">
+        <%= @study_time_str %>
+      </td>
+    </tr>
+    <tr>
+      <th class="table-secondary">
+        Temps d'auto-obertura de la caixa
+      </th>
+      <td class="table-success">
+        <%= @limit_time_str %>
+      </td>
+    </tr>
+    <tr>
+      <th class="table-secondary">
+        Percentatge mínim d'encerts
+      </th>
+      <td class="table-success">
+        <%= @percent %>%
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+Si son correctes diposita el mòbil a la capsa pomodoro i tanca-la,
+si us plau. Quan l'hagis tancat, prem continuar per començar l'estudi...
+<br/>
+<br/>
 
 <form method="post">
   <button type="submit" class="btn btn-primary">Continuar</button>

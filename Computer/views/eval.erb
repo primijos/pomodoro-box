@@ -11,33 +11,43 @@
 <% end %>
 
 <% if @show_results %>
-  <h1> El teu resultat... <%= @pct %>/100 (esperat: >= <%= @percent %>)</h1>
+  <h2> El teu resultat... <%= @pct %>/100 (esperat: >= <%= @percent %>)</h2>
 <% end %>
 
 
 <form method="post">
   <% @questions.each_with_index do |question,qi| %>
+    <p class="<%= question[:status] == :ok ? 'text-bg-success p-1' : ( question[:status] == :ko ? 'text-bg-danger p-1' : '') %>">
     <%= question[:text] %>
     <br>
     <% question[:responses].each_with_index do |response,ri| %>
-      <input <%= response[:checked] %> <%= @disabled_str %> name="question_<%=qi%>" type="radio" value="<%=ri%>" class="<%= response[:status]  %>">
-      <%= response[:text] %> <%= response[:good] %>
+      <input <%= response[:checked] %> <%= @disabled_str %> name="question_<%=qi%>" type="radio" value="<%=ri%>">
+      <!--
+      <span class="<%= response[:status] == :ok ? 'text-bg-success p-1' : ( response[:status] == :ko ? 'text-bg-danger p-1' : '') %>">
+      -->
+        <%= response[:text] %> <%= response[:good] ? "(*)" : "" %>
+      <!--
+      </span>
+      -->
+      </input>
       <br>
     <% end %>
+    </p>
   <% end %>
+  <br>
   <% if @show_results %>
     <% if @pct >= @percent %>
-      <a href="/open-box" role="button">Genial, obre la caixa!</a>
+      <a href="/open-box" class="btn btn-success" role="button">Genial, obre la caixa!</a>
       </button>
     <% else %>
-      <a href="/eval" role="button">Vaja... tornem a provar-ho</a>
+      <a href="/eval" class="btn btn-warning" role="button">Vaja... tornem a provar-ho</a>
       ... o ...
-      <a href="/study" role="button">Vaja... tornem a repassar...</a>
+      <a href="/study" class="btn btn-warning" role="button">Vaja... tornem a repassar...</a>
     <% end %>
   <% else %>
-    <button type="submit" class="btn btn-primary">
-      Envia!
-    </button>
+    <form method="post" class="d-flex" role="search">
+      <button class="btn btn-success" type="submit">Validar</button>
+    </form>
   <% end %>
 </form>
 

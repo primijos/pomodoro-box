@@ -4,11 +4,7 @@
 
 <h1> Selecciona el tema que vols preparar </h1>
 <ul>
-  <li> <a href="/theme/mat">Matemàtiques</a>
-  <li> <a href="/theme/tec">Tecnologia</a>
-  <li> <a href="/theme/rob">Robòtica</a>
-  <li> <a href="/theme/cat">Català</a>
-    <% 100.times do |t| %>
-      <li> elemento <%= t %>
-    <% end %>
+  <% @themes.each do |theme| %>
+    <li> <a href="/theme/<%= theme[:code]%>"><%=theme[:name]%></a>
+  <% end %>
 </ul>

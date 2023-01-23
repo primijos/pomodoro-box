@@ -2,24 +2,30 @@
   Pomodoro-box, selecciona el temps
 <% end %>
 
-<h1> Selecciona el temps que vols dedicar...</h1>
-<form method="post">
-  <h2> ...l'estudi...</h1>
+<h1> Selecciona el temps...</h1>
+<form class="row gy-3 gx-3 align-items-center" method="post">
+  <h2> ...que vols dedicar a l'estudi...</h1>
   <% @prefix=:study%>
   <%= erb :time_form_fields %>
-  <h2> ...i el límit per recuperar el telèfon :-)</h1>
+  <h2> ...límit per recuperar el telèfon :-)</h1>
   <% @prefix=:limit%>
   <%= erb :time_form_fields %>
-<h1>I el percentatge mínim d'encerts</h1>
-  <select name="percent">
+
+  <h2>Indica el percentatge mínim d'encerts per poder obrir abans del límit de temps</h2>
+  <div class="col-auto">
+  <select class="form-select" name="percent">
     <% 6.times do |t| %>
       <option value="<%= 50 + t*10 %>">
       <%= 50 + t*10 %>%
       </option>
     <% end %>
   </select>
+  </div>
 
-  <br/>
-
-  <button type="submit" class="XXbtn XXbtn-primary">Enviar</button>
+  <h2> I, finalment, prem...</h2>
+  <div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </div>
+  </div>
 </form>

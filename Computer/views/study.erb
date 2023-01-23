@@ -2,8 +2,12 @@
   Pomodoro-box, pepara el tema
 <% end %>
 
-<h1> Prepara el tema </h1>
+<h1> Prepara el tema: <%= @theme_name %> </h1>
 
-<form method="post">
-  <button>Fet, viem com ha anat!</button>
+<%= @theme_content %>
+
+<br>
+<br>
+<form method="post" class="d-flex" role="search">
+  <button id="validatebutton" type="submit" class="btn btn-primary disabled">Fet, veiem com ha anat!</button>
 <form>
